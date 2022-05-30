@@ -6,7 +6,7 @@ pragma solidity ^0.8.12;
 /// @author C-Mierez
 /// @notice Just a contract highlighting some basic behavior of the Encoding functionality in Solidity
 
-contract Encoding {
+contract Encode {
     // Before Solidity version 0.8.12 this was the way to concatenate strings:
     function concatStrings(string calldata _str1, string calldata _str2)
         public
