@@ -7,7 +7,8 @@ interface networkConfig {
   networkName: string;
   contracts: {
     tokens: { [tokenName: string]: string };
-    priceFeeds?: {};
+    priceFeeds?: { [name: string]: string };
+    other?: { [name: string]: string };
   };
   config: {
     isLocalChain: boolean;
@@ -28,6 +29,9 @@ export const networks: networksType = {
     config: {
       isLocalChain: true,
       shouldVerify: true,
+      gasLane:
+        "0x4b09e658ed251bcafeebbc69400383d49f344ace09b9576fe248bb02c003fe9f",
+      callbackGasLimit: "500000",
     },
   },
   4: {
@@ -55,11 +59,24 @@ export const networks: networksType = {
   80001: {
     networkName: "mumbai",
     contracts: {
-      tokens: {},
+      tokens: {
+        link: "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
+      },
+      priceFeeds: {
+        eth_usd: "0x0715A7794a1dc8e42615F059dD6e406A6594651A",
+      },
+      other: {
+        VRFCoordinatorV2: "0x7a1BaC17Ccc5b313516C5E16fb24f7659aA5ebed",
+      },
     },
     config: {
       isLocalChain: false,
       shouldVerify: true,
+      // Chainlink
+      subscriptionId: "609",
+      gasLane:
+        "0x4b09e658ed251bcafeebbc69400383d49f344ace09b9576fe248bb02c003fe9f",
+      callbackGasLimit: "500000",
     },
   },
   137: {

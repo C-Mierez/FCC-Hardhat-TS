@@ -1,6 +1,8 @@
+import { testBasicNFT } from "./BasicNFT/BasicNFT.test";
 import { baseContext } from "./shared/contexts";
-import { testUselessBank } from "./UselessBank/UselessBank.test";
+import { testRandomNFT } from "./RandomNFT/RandomNFT.test";
 
 baseContext("Tests", function () {
-  testUselessBank();
+  testBasicNFT();
+  testRandomNFT();
 });
