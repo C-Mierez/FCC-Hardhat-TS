@@ -4,26 +4,18 @@ import { isCurrentChainLocal } from "../utils/scripts/isCurrentChainLocal";
 import verify from "../utils/scripts/verify";
 import { VERIFICATION_BLOCK_CONFIRMATIONS } from "../utils/utils-hardhat-config";
 
-const deployToken: DeployFunction = async function ({
+const deployTestNFT: DeployFunction = async function ({
   getNamedAccounts,
   deployments,
 }: HardhatRuntimeEnvironment) {
-  const { deploy, log } = deployments;
+  const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
 
   const { isLocal, chainId } = isCurrentChainLocal();
 
-  let toDeploy: string;
   const args: any[] = [];
-  if (isLocal) {
-    toDeploy = "TestToken";
-    args.push("TestToken", "TT");
-  } else {
-    toDeploy = "Token";
-    args.push("Token", "T");
-  }
 
-  const token = await deploy("Token", {
+  const token = await deploy("TestNFT", {
     from: deployer,
     args: args,
     log: true,
@@ -35,6 +27,6 @@ const deployToken: DeployFunction = async function ({
   }
 };
 
-export default deployToken;
+export default deployTestNFT;
 
-deployToken.tags = ["all", "Token"];
+deployTestNFT.tags = ["all", "TestNFT"];

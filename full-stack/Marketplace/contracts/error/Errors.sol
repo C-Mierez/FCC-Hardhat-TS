@@ -22,10 +22,12 @@ error UnexpectedCaller(address caller, address expected);
 /// @notice Emitted when the caller does not have the required permissions
 error UnauthorizedCaller(address caller);
 
-/* ---------------------------- ERC Token Errors ---------------------------- */
+/// @notice Emitted when the address does not have enough balance
+error NotEnoughBalance();
 
-/// @notice Emitted when the address does not have enough token balance
-error NotEnoughBalance(address caller, uint256 expected);
+error TransferFailed();
+
+/* ---------------------------- ERC Token Errors ---------------------------- */
 
 /// @notice Emitted when an ERC20 transfer fails. Catching boolean return from
 /// the transfer methods.

@@ -1,5 +1,6 @@
 import { Wallet } from "@ethersproject/wallet";
-import { TestToken, UselessBank } from "../../typechain-types";
+import { Market } from "../../typechain-types/contracts/Market";
+import { TestNFT } from "../../typechain-types/contracts/test/TestNFT";
 
 declare module "mocha" {
   export interface Context {
@@ -23,6 +24,6 @@ export interface Signers {
 
 // Expand this interface with all the contracts needed
 export interface Contracts {
-  bank: UselessBank;
-  token: TestToken;
+  market: Market;
+  nft: TestNFT;
 }

@@ -6,10 +6,11 @@ export enum BaseErrors {
   ZeroOrNegativeValue = "ZeroOrNegativeValue",
   UnexpectedCaller = "UnexpectedCaller",
   UnauthorizedCaller = "UnauthorizedCaller",
+  NotEnoughBalance = "NotEnoughBalance",
+  TransferFailed = "TransferFailed",
 }
 
 export enum TokenErrors {
-  NotEnoughBalance = "NotEnoughBalance",
   ERC20TransferFailed = "ERC20TransferFailed",
   MaxSupplyExceeded = "MaxSupplyExceeded",
 }
@@ -25,4 +26,14 @@ export enum ERC20Errors {
 
 export enum OwnableErrors {
   NotOwner = "Ownable: caller is not the owner",
+}
+
+export enum MarketErrors {
+  NotApproved = "NotApproved",
+  AlreadyListed = "AlreadyListed",
+  NotListed = "NotListed",
+  NotOwner = "NotOwner",
+  InvalidAmountPayed = "InvalidAmountPayed",
+  NoProceedsToClaim = "NoProceedsToClaim",
+  NotEnoughContractBalance = "NotEnoughContractBalance",
 }

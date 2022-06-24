@@ -25,8 +25,8 @@ export function baseContext(description: string, hooks: () => void) {
       await deployments.fixture("all");
 
       this.contracts = {
-        bank: await ethers.getContract("UselessBank"),
-        token: await ethers.getContract("TestToken"),
+        market: await ethers.getContract("Market"),
+        nft: await ethers.getContract("TestNFT"),
       };
       // this.loadFixture = waffle.createFixtureLoader(signers);
     });
