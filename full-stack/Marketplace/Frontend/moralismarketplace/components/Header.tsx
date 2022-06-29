@@ -5,7 +5,10 @@ import styles from "../styles/Layout.module.css"
 export default function Header() {
     return (
         <nav className={styles.header}>
-            <h1>NFT Marketplace</h1>
+            <div>
+                <h1>NFT Marketplace</h1>
+                <h3>👷‍♂️ Moralis</h3>
+            </div>
             <div className={styles.buttons}>
                 <Link href={"/"}>
                     <a>Home</a>

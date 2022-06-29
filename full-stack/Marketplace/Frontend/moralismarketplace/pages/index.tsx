@@ -13,23 +13,28 @@ const Home: NextPage = () => {
     return (
         <div className={styles.home}>
             <h2>Recently Listed NFTs</h2>
-            <div className={styles.card_grid}>
+            <div>
                 {isFetchingListed ? (
                     <div>Loading...</div>
+                ) : listedNFTs.length === 0 ? (
+                    <div className={styles.empty_grid}>No NFTs have been listed yet!</div>
                 ) : (
-                    listedNFTs.map((nft) => {
-                        const { price, nftAddress, tokenId, marketAddress, owner } = nft.attributes
-                        return (
-                            <NFTCard
-                                price={price}
-                                marketAddress={marketAddress}
-                                nftAddress={nftAddress}
-                                owner={owner}
-                                tokenId={tokenId}
-                                key={`${nftAddress}${tokenId}`}
-                            ></NFTCard>
-                        )
-                    })
+                    <div className={styles.card_grid}>
+                        {listedNFTs.map((nft) => {
+                            const { price, nftAddress, tokenId, marketAddress, owner } =
+                                nft.attributes
+                            return (
+                                <NFTCard
+                                    price={price}
+                                    marketAddress={marketAddress}
+                                    nftAddress={nftAddress}
+                                    owner={owner}
+                                    tokenId={tokenId}
+                                    key={`${nftAddress}${tokenId}`}
+                                ></NFTCard>
+                            )
+                        })}
+                    </div>
                 )}
             </div>
         </div>

@@ -1,7 +1,7 @@
 import { ethers } from "ethers"
 import { ChangeEvent, MouseEvent, useState } from "react"
 import { useWeb3Contract } from "react-moralis"
-import { Input, Modal } from "web3uikit"
+import { Input, Modal, useNotification } from "web3uikit"
 import { Market__factory } from "../typechain-types/factories/contracts/Market__factory"
 
 interface Params {
@@ -21,6 +21,8 @@ export default function UpdateListingModal({
 }: Params) {
     const [newPriceToUpdate, setNewPriceToUpdate] = useState("0")
 
+    const dispatch = useNotification()
+
     const { runContractFunction: updateListing } = useWeb3Contract({
         abi: Market__factory.abi,
         contractAddress: marketAddress,
@@ -36,6 +38,16 @@ export default function UpdateListingModal({
         setNewPriceToUpdate(e.target.value)
     }
 
+    const handleUpdateListingSuccess = async (tx: any) => {
+        await tx.wait(1)
+        dispatch({
+            type: "success",
+            message: "Listing updated. Please refresh.",
+            title: "Listing updated.",
+            position: "topL",
+        })
+    }
+
     return (
         <Modal
             isVisible={isVisible}
@@ -44,6 +56,7 @@ export default function UpdateListingModal({
                     onError: (e) => {
                         console.log(e)
                     },
+                    onSuccess: handleUpdateListingSuccess,
                 })
             }}
             onCancel={() => {
