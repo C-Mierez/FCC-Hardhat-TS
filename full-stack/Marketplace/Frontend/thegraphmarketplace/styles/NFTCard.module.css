@@ -1,0 +1,49 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    aspect-ratio: 1;
+
+    background-color: hsla(0, 0%, 100%, 0.025);
+
+    padding: 1rem;
+    
+    border-radius: 1rem;
+
+    transition: 0.2s;
+}
+
+.card:hover {
+    cursor: pointer;
+
+    background-color: hsla(0, 0%, 100%, 0.055);
+}
+
+.card_details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    gap: 1rem;
+}
+
+.card_image {
+    display: grid;
+    justify-items: center;
+
+}
+
+
+.card_description {
+    display: grid;
+
+    justify-items: center;
+
+    color: hsla(216, 77%, 75%, 0.856); ;
+}
+
+.placeholder {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+}
