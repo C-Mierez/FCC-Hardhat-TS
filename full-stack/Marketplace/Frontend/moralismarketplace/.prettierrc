@@ -3,5 +3,6 @@
     "useTabs": false,
     "semi": false,
     "singleQuote": false,
+    "parser": "typescript",
     "printWidth": 99
 }
