@@ -21,5 +21,9 @@
 
 .header a {
     text-decoration: none;
-    color: black;
+    color: inherit;
+}
+
+.main {
+    padding: 1.5rem 1rem;
 }

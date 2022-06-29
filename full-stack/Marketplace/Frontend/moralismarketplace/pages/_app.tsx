@@ -3,6 +3,10 @@ import type { AppProps } from "next/app"
 import { MoralisProvider } from "react-moralis"
 import Header from "../components/Header"
 import Head from "next/head"
+import styles from "../styles/Layout.module.css"
+
+const MORALIS_ID = process.env.NEXT_PUBLIC_MORALIS_ID || ""
+const MORALIS_URL = process.env.NEXT_PUBLIC_MORALIS_URL || ""
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -12,9 +16,11 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <meta name="description" content="NFT Marketplace" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <MoralisProvider initializeOnMount={false}>
+            <MoralisProvider appId={MORALIS_ID} serverUrl={MORALIS_URL}>
                 <Header />
-                <Component {...pageProps} />
+                <div className={styles.main}>
+                    <Component {...pageProps} />
+                </div>
             </MoralisProvider>
         </>
     )

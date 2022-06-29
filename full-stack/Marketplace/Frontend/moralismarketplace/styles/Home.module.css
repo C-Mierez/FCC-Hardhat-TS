@@ -1,0 +1,24 @@
+.home {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+
+    padding-inline: 2rem;
+}
+
+.card_grid {
+    display: grid;
+
+    grid-template-columns: none;
+    gap: 1.5rem;
+    
+}
+
+@media (min-width: 50em) {
+    .card_grid {
+        grid-template-columns: repeat(auto-fit, minmax(32%, 1fr));
+        
+    }
+}
