@@ -6,20 +6,25 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "moralis:sync": "moralis-admin-cli connect-local-devchain --chain hardhat --moralisSubdomain t866ry0lnlo7.usemoralis.com --frpcPath ./frpc/frpc.exe",
+    "moralis:cloud": "moralis-admin-cli watch-cloud-folder --moralisSubdomain t866ry0lnlo7.usemoralis.com --autoSave 1 --moralisCloudfolder ./moralisCloud"
   },
   "dependencies": {
+    "ethers": "^5.6.9",
     "moralis": "^1.8.0",
     "next": "12.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-moralis": "^1.4.0",
+    "truncate-eth-address": "^1.0.2",
     "web3uikit": "^0.1.162"
   },
   "devDependencies": {
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
+    "dotenv": "^16.0.1",
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6",
     "typescript": "4.7.4"
