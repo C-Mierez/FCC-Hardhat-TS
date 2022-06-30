@@ -1,0 +1,36 @@
+specVersion: 0.0.4
+schema:
+    file: ./schema.graphql
+dataSources:
+    - kind: ethereum
+      name: Market
+      network: rinkeby
+      source:
+          address: "0xb689A6670c17d31ce42fd0b370fB009873eeb789"
+          abi: Market
+          startBlock: 10938148
+      mapping:
+          kind: ethereum/events
+          apiVersion: 0.0.5
+          language: wasm/assemblyscript
+          entities:
+              - BoughtItem
+              - ClaimedProceeds
+              - ListedItem
+              - UpdatedItem
+              - WithdrawnItem
+          abis:
+              - name: Market
+                file: ./abis/Market.json
+          eventHandlers:
+              - event: BoughtItem(indexed address,address,indexed address,indexed uint256,uint256)
+                handler: handleBoughtItem
+              - event: ClaimedProceeds(indexed address,indexed uint256)
+                handler: handleClaimedProceeds
+              - event: ListedItem(indexed address,indexed address,indexed uint256,uint256)
+                handler: handleListedItem
+              - event: UpdatedItem(indexed address,indexed address,indexed uint256,uint256)
+                handler: handleUpdatedItem
+              - event: WithdrawnItem(indexed address,indexed uint256)
+                handler: handleWithdrawnItem
+          file: ./src/market.ts
