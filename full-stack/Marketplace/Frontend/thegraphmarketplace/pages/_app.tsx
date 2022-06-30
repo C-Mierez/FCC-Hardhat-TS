@@ -6,8 +6,12 @@ import Head from "next/head"
 import styles from "../styles/Layout.module.css"
 import { NotificationProvider } from "web3uikit"
 
-const MORALIS_ID = process.env.NEXT_PUBLIC_MORALIS_ID || ""
-const MORALIS_URL = process.env.NEXT_PUBLIC_MORALIS_URL || ""
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client"
+
+const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    uri: "https://api.studio.thegraph.com/query/30184/nftmarketplace/v0.0.1",
+})
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -18,12 +22,14 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <MoralisProvider initializeOnMount={false}>
-                <NotificationProvider>
-                    <Header />
-                    <div className={styles.main}>
-                        <Component {...pageProps} />
-                    </div>
-                </NotificationProvider>
+                <ApolloProvider client={client}>
+                    <NotificationProvider>
+                        <Header />
+                        <div className={styles.main}>
+                            <Component {...pageProps} />
+                        </div>
+                    </NotificationProvider>
+                </ApolloProvider>
             </MoralisProvider>
         </>
     )

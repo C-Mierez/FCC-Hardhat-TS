@@ -7,7 +7,7 @@ export default function Header() {
         <nav className={styles.header}>
             <div>
                 <h1>NFT Marketplace</h1>
-                <h3>👷‍♂️ Moralis</h3>
+                <h3>🔍 TheGraph</h3>
             </div>
             <div className={styles.buttons}>
                 <Link href={"/"}>

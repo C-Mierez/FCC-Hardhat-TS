@@ -1,36 +1,56 @@
+import { gql, useQuery } from "@apollo/client"
 import type { NextPage } from "next"
 import Head from "next/head"
-import { useMoralisQuery, useMoralis } from "react-moralis"
+import { useMoralis } from "react-moralis"
 import NFTCard from "../components/NFTCard"
 import styles from "../styles/Home.module.css"
+import contractAddresses from "../constants/networkMapping.json"
+
+const GET_ACTIVE_ITEMS = gql`
+    {
+        activeItems(first: 5, where: { buyer: "0x0000000000000000000000000000000000000000" }) {
+            id
+            buyer
+            owner
+            nft
+            tokenId
+            price
+        }
+    }
+`
 
 const Home: NextPage = () => {
-    const { data: listedNFTs, isFetching: isFetchingListed } = useMoralisQuery(
-        "ActiveItem",
-        (query) => query.limit(10).descending("tokenId")
-    )
+    const { loading, error, data } = useQuery(GET_ACTIVE_ITEMS)
+    const { chainId } = useMoralis()
+    const parsedChainId = chainId
+        ? (parseInt(chainId).toString() as keyof typeof contractAddresses)
+        : "31337"
+    const marketAddress = contractAddresses[parsedChainId]["Market"][0]
+
+    const activeItems = data?.activeItems
+
+    console.log(data)
 
     return (
         <div className={styles.home}>
             <h2>Recently Listed NFTs</h2>
             <div>
-                {isFetchingListed ? (
+                {loading ? (
                     <div>Loading...</div>
-                ) : listedNFTs.length === 0 ? (
+                ) : !activeItems ? (
                     <div className={styles.empty_grid}>No NFTs have been listed yet!</div>
                 ) : (
                     <div className={styles.card_grid}>
-                        {listedNFTs.map((nft) => {
-                            const { price, nftAddress, tokenId, marketAddress, owner } =
-                                nft.attributes
+                        {activeItems.map((item: any) => {
+                            const { price, nft, tokenId, owner } = item
                             return (
                                 <NFTCard
                                     price={price}
                                     marketAddress={marketAddress}
-                                    nftAddress={nftAddress}
+                                    nftAddress={nft}
                                     owner={owner}
                                     tokenId={tokenId}
-                                    key={`${nftAddress}${tokenId}`}
+                                    key={`${nft}${tokenId}`}
                                 ></NFTCard>
                             )
                         })}
