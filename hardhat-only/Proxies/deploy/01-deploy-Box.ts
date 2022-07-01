@@ -4,7 +4,7 @@ import { isCurrentChainLocal } from "../utils/scripts/isCurrentChainLocal";
 import verify from "../utils/scripts/verify";
 import { VERIFICATION_BLOCK_CONFIRMATIONS } from "../utils/utils-hardhat-config";
 
-const deployToken: DeployFunction = async function ({
+const deployBox: DeployFunction = async function ({
   getNamedAccounts,
   deployments,
 }: HardhatRuntimeEnvironment) {
@@ -13,28 +13,27 @@ const deployToken: DeployFunction = async function ({
 
   const { isLocal, chainId } = isCurrentChainLocal();
 
-  let toDeploy: string;
   const args: any[] = [];
-  if (isLocal) {
-    toDeploy = "TestToken";
-    args.push("TestToken", "TT");
-  } else {
-    toDeploy = "Token";
-    args.push("Token", "T");
-  }
 
-  const token = await deploy("Token", {
+  const box = await deploy("Box", {
     from: deployer,
     args: args,
+    proxy: {
+      proxyContract: "OpenZeppelinTransparentProxy",
+      viaAdminContract: {
+        name: "BoxProxyAdmin",
+        artifact: "BoxProxyAdmin",
+      },
+    },
     log: true,
     waitConfirmations: isLocal ? 1 : VERIFICATION_BLOCK_CONFIRMATIONS,
   });
 
   if (!isLocal) {
-    await verify(token.address, args);
+    await verify(box.address, args);
   }
 };
 
-export default deployToken;
+export default deployBox;
 
-deployToken.tags = ["all", "Token"];
+deployBox.tags = ["all", "Box"];

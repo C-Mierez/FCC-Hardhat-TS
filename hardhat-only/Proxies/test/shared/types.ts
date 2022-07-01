@@ -21,7 +21,4 @@ export interface Signers {
 }
 
 // Expand this interface with all the contracts needed
-export interface Contracts {
-  bank: UselessBank;
-  token: TestToken;
-}
+export interface Contracts {}
